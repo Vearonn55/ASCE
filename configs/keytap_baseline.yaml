@@ -1,0 +1,30 @@
+source:
+  type: file
+  path: data/example.wav
+preprocessor:
+  type: standard
+  target_sample_rate: 16000
+  highpass_hz: 80
+segmenter:
+  type: onset
+  method: energy
+  hop_length: 256
+  threshold_ratio: 3.0
+  min_gap_sec: 0.08
+  pre_sec: 0.02
+  post_sec: 0.18
+features:
+  type: logmel
+  n_mels: 128
+  n_fft: 512
+  hop_length: 128
+  n_frames: 32
+model:
+  type: spectrogram_cnn
+decoder:
+  type: argmax
+train:
+  epochs: 8
+  batch_size: 16
+  lr: 0.01
+  representation: mel

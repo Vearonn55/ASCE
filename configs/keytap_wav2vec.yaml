@@ -1,0 +1,30 @@
+source:
+  type: file
+  path: data/example.wav
+preprocessor:
+  type: standard
+  target_sample_rate: 16000
+  highpass_hz: 80
+segmenter:
+  type: onset
+  method: energy
+  pre_sec: 0.02
+  post_sec: 0.18
+features:
+  type: logmel
+  n_mels: 64
+  n_frames: 32
+model:
+  type: wav2vec2
+  freeze: true
+  unfreeze_last_n: 0
+  device: auto
+decoder:
+  type: ngram_beam
+  lm_weight: 1.5
+  beam_size: 8
+train:
+  epochs: 4
+  batch_size: 8
+  lr: 0.0001
+  representation: wave

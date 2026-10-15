@@ -1,0 +1,30 @@
+source:
+  type: file
+  path: data/example.wav
+preprocessor:
+  type: standard
+  target_sample_rate: 16000
+  highpass_hz: 20
+segmenter:
+  type: fixed_window
+  window_sec: 0.5
+  hop_sec: 0.5
+features:
+  type: band_energy
+  n_bands: 16
+model:
+  type: mlp
+  input_dim: 16
+  num_classes: 8
+  labels:
+    - nop
+    - mov
+    - add
+    - load
+    - store
+    - cmp
+    - jmp
+    - call
+decoder:
+  type: isa_prior
+  prior_weight: 0.8
